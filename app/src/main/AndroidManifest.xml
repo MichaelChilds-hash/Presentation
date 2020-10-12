@@ -16,9 +16,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".TriggerShortcutActivity"
+        <activity android:name=".FriendlyActivity"
             android:screenOrientation="portrait"/>
-        <activity android:name=".Shortcut"
+        <activity android:name=".ChatActivity"
             android:screenOrientation="portrait"
             android:resizeableActivity="true"/>
     </application>

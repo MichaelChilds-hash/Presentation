@@ -8,8 +8,11 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        triggerShortcut.setOnClickListener{
-            startActivity(TriggerShortcutActivity::class)
+        addFriend.setOnClickListener{
+            startActivity(FriendlyActivity::class)
+        }
+        chat.setOnClickListener {
+            startActivity(ChatActivity::class)
         }
     }
 }

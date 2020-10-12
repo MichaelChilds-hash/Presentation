@@ -1,22 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:padding="16dp"
     android:orientation="vertical"
-    tools:context=".MainActivity">
+    android:gravity="center">
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addFriend"
         style="@style/AppButton"
-        android:text="Add Friend Activity"/>
+        android:text="Add Friend"/>
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/chat"
+        android:id="@+id/notificationFromFriend"
         style="@style/AppButton"
-        android:text="Chat Activity"/>
+        android:text="Notification From Friend"/>
 
 </LinearLayout>
