@@ -9,13 +9,10 @@ import android.graphics.drawable.Icon
 import android.net.Uri
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.app.NotificationManagerCompat
 import kotlinx.android.synthetic.main.activity_add_friend.*
 
 class FriendlyActivity : AppCompatActivity() {
-
-    companion object {
-        const val CHANNEL_ID = "FriendlyChannelId_"
-    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,8 +28,10 @@ class FriendlyActivity : AppCompatActivity() {
 
     private fun addFriend() {
         val friend = Friend.createDefault()
-        val shortcutIntent = Intent(Intent.ACTION_VIEW,
-            Uri.parse("prezo://open/chat?${friend.id}"))
+        val shortcutIntent = Intent(
+            Intent.ACTION_VIEW,
+            Uri.parse("prezo://open/chat?${friend.id}")
+        )
         val personIcon = Icon.createWithResource(this, friend.iconRes)
         val person = Person.Builder()
             .setName(friend.name)
@@ -59,12 +58,20 @@ class FriendlyActivity : AppCompatActivity() {
             .setIcon(personIcon)
             .build()
 
-        val notification = Notification.Builder(this, "$CHANNEL_ID${friend.id}")
-            .setStyle(Notification.MessagingStyle(person)
-                .addMessage("Hi", System.currentTimeMillis()-20000L, person)
-                .addMessage("... Hello?", System.currentTimeMillis()-5000L, person)
+        val bubble = Notification.BubbleMetadata.Builder(friend.id).build()
+        val notification = Notification.Builder(this, MainActivity.CHANNEL_ID)
+            .setStyle(
+                Notification.MessagingStyle(person)
+                    .addMessage("Hi", System.currentTimeMillis() - 20000L, person)
+                    .addMessage("... Hello?", System.currentTimeMillis() - 5000L, person)
             )
+            .setBubbleMetadata(bubble)
             .setShortcutId(friend.id)
+            .setSmallIcon(friend.iconRes)
+            .setContentTitle("My notification")
+            .setContentText("Hello World!")
             .build()
+
+        NotificationManagerCompat.from(this).notify((0..Int.MAX_VALUE).random(), notification)
     }
 }
