@@ -1,5 +1,6 @@
 package com.mbc.android11.database.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
@@ -11,7 +12,7 @@ interface UserDao {
     fun insert(user: User)
 
     @Query("select * from user where isMe")
-    fun getMe(): User
+    fun getMe(): LiveData<User>
 
     @Query("delete from user")
     fun deleteAll()

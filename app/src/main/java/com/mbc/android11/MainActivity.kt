@@ -2,17 +2,17 @@ package com.mbc.android11
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
-import android.content.Context
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
+import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.mbc.android11.database.AppRoomDb
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var viewModel: MainViewModel
+    private val viewModel: MainViewModel by viewModelsWithApplication()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,11 +25,7 @@ class MainActivity : AppCompatActivity() {
         }
         createNotificationChannel()
 
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
-        val user = viewModel.me
-        val user2 = viewModel.me
-
+        viewModel.me.observe(this, Observer { Log.e("please", it.firstName) })
     }
 
     private fun createNotificationChannel() {
