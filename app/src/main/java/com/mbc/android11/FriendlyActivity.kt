@@ -11,6 +11,8 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.NotificationManagerCompat
 import kotlinx.android.synthetic.main.activity_add_friend.*
+import java.util.*
+import kotlin.concurrent.schedule
 
 class FriendlyActivity : AppCompatActivity() {
 
@@ -21,8 +23,10 @@ class FriendlyActivity : AppCompatActivity() {
         addFriend.setOnClickListener {
             addFriend()
         }
-        notificationFromFriend.setOnClickListener {
-            notificationFromFriend()
+        messageFromFriend.setOnClickListener {
+            Timer().schedule(2000) {
+                messageFromFriend()
+            }
         }
     }
 
@@ -47,12 +51,14 @@ class FriendlyActivity : AppCompatActivity() {
             //.setCategories() //for sharing types probably won't implement
             .build()
 
+
         getSystemService(ShortcutManager::class.java).pushDynamicShortcut(shortcut)
     }
 
-    private fun notificationFromFriend() {
+    private fun messageFromFriend() {
         val friend = Friend.createDefault()
         val personIcon = Icon.createWithResource(this, friend.iconRes)
+
         val person = Person.Builder()
             .setName(friend.name)
             .setIcon(personIcon)
@@ -62,8 +68,7 @@ class FriendlyActivity : AppCompatActivity() {
         val notification = Notification.Builder(this, MainActivity.CHANNEL_ID)
             .setStyle(
                 Notification.MessagingStyle(person)
-                    .addMessage("Hi", System.currentTimeMillis() - 20000L, person)
-                    .addMessage("... Hello?", System.currentTimeMillis() - 5000L, person)
+                    .addMessage("Hi ${(0..Int.MAX_VALUE).random()}", System.currentTimeMillis() - 1000L, person)
             )
             .setBubbleMetadata(bubble)
             .setShortcutId(friend.id)
@@ -72,6 +77,6 @@ class FriendlyActivity : AppCompatActivity() {
             .setContentText("Hello World!")
             .build()
 
-        NotificationManagerCompat.from(this).notify((0..Int.MAX_VALUE).random(), notification)
+        NotificationManagerCompat.from (this).notify(friend.id.toIntOrNull() ?: 0, notification)
     }
 }
