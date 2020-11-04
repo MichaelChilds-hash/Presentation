@@ -9,14 +9,42 @@
     android:orientation="vertical"
     tools:context=".MainActivity">
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.mbc.android11.utils.ProfileImages
+            android:id="@+id/profile"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:screenReaderFocusable="true"
+            android:importantForAccessibility="yes"
+            android:contentDescription="Profile" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/settings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:src="@drawable/ic_settings"
+            android:screenReaderFocusable="true"
+            android:contentDescription="Settings"/>
+
+    </RelativeLayout>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/friends"
+        style="@style/AppButton"
+        android:text="Friends"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/conversations"
+        style="@style/AppButton"
+        android:text="Conversations"/>
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addFriend"
         style="@style/AppButton"
-        android:text="Add Friend Activity"/>
-
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/chat"
-        style="@style/AppButton"
-        android:text="Chat Activity"/>
+        android:text="Add Friend"/>
 
 </LinearLayout>

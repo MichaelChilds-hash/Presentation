@@ -4,10 +4,12 @@ import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.viewModels
+import android.view.textclassifier.ConversationAction
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
+import com.mbc.android11.screens.convo.ConversationsActivity
+import com.mbc.android11.screens.friends.FriendActivity
+import com.mbc.android11.utils.startActivity
+import com.mbc.android11.utils.viewModelsWithApplication
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
@@ -17,15 +19,15 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-        addFriend.setOnClickListener {
-            startActivity(FriendlyActivity::class)
-        }
-        chat.setOnClickListener {
-            startActivity(ChatActivity::class)
-        }
-        createNotificationChannel()
 
-        viewModel.me.observe(this, Observer { Log.e("please", it.firstName) })
+        viewModel.me.observe(this, { profile.setUsers(listOf(it)) })
+        profile.setOnClickListener { startActivity(ConversationsActivity::class) }
+        settings.setOnClickListener { startActivity(ConversationsActivity::class) }
+        friends.setOnClickListener { startActivity(FriendActivity::class) }
+        addFriend.setOnClickListener { startActivity(FriendlyActivity::class) }
+        conversations.setOnClickListener { startActivity(ConversationsActivity::class) }
+
+        createNotificationChannel()
     }
 
     private fun createNotificationChannel() {

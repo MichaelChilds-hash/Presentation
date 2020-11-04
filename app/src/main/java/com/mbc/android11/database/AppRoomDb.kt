@@ -5,18 +5,19 @@ import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.sqlite.db.SupportSQLiteDatabase
+import com.mbc.android11.R
 import com.mbc.android11.database.dao.ConversationDao
 import com.mbc.android11.database.dao.MessageDao
 import com.mbc.android11.database.dao.UserDao
-import com.mbc.android11.model.Conversation
-import com.mbc.android11.model.Message
-import com.mbc.android11.model.User
-import com.mbc.android11.model.UserConversations
+import com.mbc.android11.database.entity.ConversationEntity
+import com.mbc.android11.database.entity.MessageEntity
+import com.mbc.android11.database.entity.UserEntity
+import com.mbc.android11.database.entity.UserConversationsEntity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-@Database(entities = [Message::class, User::class, Conversation::class, UserConversations::class], version = 1)
+@Database(entities = [MessageEntity::class, UserEntity::class, ConversationEntity::class, UserConversationsEntity::class], version = 1)
 abstract class AppRoomDb : RoomDatabase() {
     companion object {
         const val NAME = "a11-database"
@@ -54,38 +55,39 @@ abstract class AppRoomDb : RoomDatabase() {
         }
 
         private fun addConversations(conversationDao: ConversationDao) {
-            val test01 = "0_1".hashCode()
-            val test02 = "0_2".hashCode()
             conversationDao.deleteAll()
             conversationDao.deleteJunctionTable()
-            conversationDao.insert(Conversation("0_1".hashCode(), ""))
+            val convoId = "0_1".hashCode()
+            conversationDao.insert(ConversationEntity(convoId, "Ethan Convo", R.drawable.friend_ethan))
+            conversationDao.junction(UserConversationsEntity(0, convoId, 0))
+            conversationDao.junction(UserConversationsEntity(1, convoId, 1))
         }
 
         private fun addUsers(userDao: UserDao) {
             var id = 0
             userDao.deleteAll()
-            userDao.insert(User(id++, "Michael", "", true))
-            userDao.insert(User(id++, "Ethan", ""))
-            userDao.insert(User(id++, "Brent", ""))
-            userDao.insert(User(id++, "Chris", ""))
-            userDao.insert(User(id++, "David", ""))
-            userDao.insert(User(id++, "Guilherme", ""))
-            userDao.insert(User(id++, "Jorge", ""))
-            userDao.insert(User(id++, "Kate", ""))
-            userDao.insert(User(id++, "Lana", ""))
-            userDao.insert(User(id++, "Richard", ""))
-            userDao.insert(User(id++, "Taher", ""))
-            userDao.insert(User(id++, "Thomas", ""))
-            userDao.insert(User(id++, "Vlad", ""))
+            userDao.insert(UserEntity(id++, "Michael", 0, true))
+            userDao.insert(UserEntity(id++, "Ethan", R.drawable.friend_ethan))
+            userDao.insert(UserEntity(id++, "Brent"))
+            userDao.insert(UserEntity(id++, "Chris"))
+            userDao.insert(UserEntity(id++, "David"))
+            userDao.insert(UserEntity(id++, "Guilherme"))
+            userDao.insert(UserEntity(id++, "Jorge"))
+            userDao.insert(UserEntity(id++, "Kate"))
+            userDao.insert(UserEntity(id++, "Lana"))
+            userDao.insert(UserEntity(id++, "Richard"))
+            userDao.insert(UserEntity(id++, "Taher"))
+            userDao.insert(UserEntity(id++, "Thomas"))
+            userDao.insert(UserEntity(id++, "Vlad"))
         }
 
         private fun addMessages(messageDao: MessageDao) {
            messageDao.deleteAll()
-           messageDao.insert(Message(0, 0, 0, "Hi", System.currentTimeMillis() - 1_000_000))
-           messageDao.insert(Message(1, 0, 0, "How are you?", System.currentTimeMillis() - 995_000))
-           messageDao.insert(Message(2, 0, 1, "Hey, good thanks, and you?", System.currentTimeMillis() - 980_000))
-           messageDao.insert(Message(3, 0, 1, "Did thingy do the thing", System.currentTimeMillis() - 975_000))
-           messageDao.insert(Message(4, 0, 0, "Nah, said maybe later today", System.currentTimeMillis() - 965_000))
+           messageDao.insert(MessageEntity(0, 0, 0, "Hi", System.currentTimeMillis() - 1_000_000))
+           messageDao.insert(MessageEntity(1, 0, 0, "How are you?", System.currentTimeMillis() - 995_000))
+           messageDao.insert(MessageEntity(2, 0, 1, "Hey, good thanks, and you?", System.currentTimeMillis() - 980_000))
+           messageDao.insert(MessageEntity(3, 0, 1, "Did thingy do the thing", System.currentTimeMillis() - 975_000))
+           messageDao.insert(MessageEntity(4, 0, 0, "Nah, said maybe later today", System.currentTimeMillis() - 965_000))
         }
     }
 

@@ -3,12 +3,14 @@
     package="com.mbc.android11">
 
     <application
+        android:name=".A11App"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -16,8 +18,16 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <activity android:name=".screens.friends.FriendActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".FriendlyActivity"
             android:screenOrientation="portrait"/>
+
+        <activity android:name=".screens.convo.ConversationsActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".ChatActivity"
             android:screenOrientation="portrait"
             android:allowEmbedded="true"
@@ -28,6 +38,7 @@
                 <data android:scheme="prezo" android:host="open" android:path="/chat"/>
             </intent-filter>
         </activity>
+
     </application>
 
 </manifest>

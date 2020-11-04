@@ -4,7 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import com.mbc.android11.model.Conversation
+import com.mbc.android11.database.entity.ConversationEntity
+import com.mbc.android11.database.entity.UserConversationsEntity
 
 @Dao
 interface ConversationDao {
@@ -18,10 +19,19 @@ interface ConversationDao {
             where user.id = :userId
         """
     )
-    fun getAllForUser(userId: Int): LiveData<List<Conversation>>
+    fun getAllForUser(userId: Int): LiveData<List<ConversationEntity>>
+
+    @Query("select * from conversation")
+    fun getAll(): LiveData<List<ConversationEntity>>
+
+    @Query("select userId from user_conversations where user_conversations.conversationId = :conversationEntityId")
+    fun getUsersInConversation(conversationEntityId: Int): LiveData<List<Int>>
 
     @Insert
-    fun insert(conversation: Conversation)
+    fun insert(conversationEntity: ConversationEntity)
+
+    @Insert
+    fun junction(userConversationsEntity: UserConversationsEntity)
 
     @Query("DELETE FROM conversation")
     fun deleteAll()
