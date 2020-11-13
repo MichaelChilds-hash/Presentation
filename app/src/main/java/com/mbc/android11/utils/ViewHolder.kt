@@ -7,5 +7,7 @@ import androidx.recyclerview.widget.RecyclerView
 
 open class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
 
+    val content get() = itemView as RelativeLayout
+
     constructor(context: Context) : this(RelativeLayout(context))
 }

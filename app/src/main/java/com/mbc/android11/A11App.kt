@@ -2,11 +2,14 @@ package com.mbc.android11
 
 import android.app.Application
 import com.mbc.android11.model.Conversation
+import com.mbc.android11.model.Message
 import com.mbc.android11.model.User
 import com.mbc.android11.model.dao.ConversationDao
+import com.mbc.android11.model.dao.MessageDao
 import com.mbc.android11.model.dao.UserDao
 import com.mbc.android11.utils.Density
 import io.realm.Realm
+import io.realm.RealmConfiguration
 
 class A11App : Application() {
 
@@ -15,14 +18,17 @@ class A11App : Application() {
 
         Density.value = resources.displayMetrics.density
         Realm.init(this)
+        Realm.setDefaultConfiguration(RealmConfiguration.Builder().deleteRealmIfMigrationNeeded().build())
+
 
         createMockUsers()
         createMockConversations()
+        createMockMessages()
     }
 
     private fun createMockUsers() {
         val dao = UserDao()
-        if(dao.getAll().isEmpty()) {
+        if(dao.getAll().count() > 0) {
             dao.edit {
                 var id = 0
                 User.createMock(it, id++, "Michael", R.drawable.profile_me, isMe = true)
@@ -37,13 +43,27 @@ class A11App : Application() {
     private fun createMockConversations() {
         val userDao = UserDao()
         val dao = ConversationDao()
-        if(dao.getAll().isEmpty()) {
+        if(dao.getAll().count() > 0) {
             dao.edit {
                 Conversation.createMock(it, listOfNotNull(userDao.get(1)))
                 Conversation.createMock(it, listOfNotNull(userDao.get(2)))
                 Conversation.createMock(it, listOfNotNull(userDao.get(1), userDao.get(2)))
                 Conversation.createMock(it, listOfNotNull(userDao.get(3), userDao.get(4)))
                 Conversation.createMock(it, listOfNotNull(userDao.get(1), userDao.get(2), userDao.get(3)))
+            }
+        }
+    }
+
+    private fun createMockMessages() {
+        val dao = MessageDao()
+        val userDao = UserDao()
+        if(dao.getAll().count() > 0) {
+            dao.edit {
+                var id = 0
+                var convoId = Conversation.resolveConversationId(listOfNotNull(userDao.get(1)))
+                Message.createMock(it, id++, 0, convoId, "Hi", System.currentTimeMillis() - 1_000_000L)
+                Message.createMock(it, id++, 1, convoId, "Hello", System.currentTimeMillis() - 990_000L)
+                Message.createMock(it, id++, 1, convoId, "What doing", System.currentTimeMillis() - 980_000L)
             }
         }
     }

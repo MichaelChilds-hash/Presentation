@@ -3,10 +3,9 @@ package com.mbc.android11.screens.convo
 import android.os.Bundle
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.lifecycleScope
 import com.mbc.android11.R
 import com.mbc.android11.model.Conversation
-import com.mbc.android11.utils.viewModelsWithApplication
+import com.mbc.android11.screens.chat.ChatActivity
 import kotlinx.android.synthetic.main.activity_conversations.*
 
 class ConversationsActivity : AppCompatActivity() {
@@ -23,6 +22,6 @@ class ConversationsActivity : AppCompatActivity() {
     }
 
     private fun onConvoPressed(convo: Conversation) {
-
+        ChatActivity.show(this, convo)
     }
 }

@@ -12,7 +12,10 @@ open class Conversation : RealmObject() {
 
     companion object {
 
-        fun resolveConversationId(users: List<User>) = users.sortedBy { it.id }.joinToString { "${it.id}_" }.hashCode()
+        fun resolveConversationId(users: List<User>) = users
+                .sortedBy { it.id }
+                .joinToString { "${it.id}_" }
+                .hashCode()
 
         fun createMock(dao: ConversationDao, users: List<User>) {
             val id = resolveConversationId(users)

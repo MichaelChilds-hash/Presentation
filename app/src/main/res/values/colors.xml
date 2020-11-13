@@ -3,4 +3,9 @@
     <color name="colorPrimary">#6200EE</color>
     <color name="colorPrimaryDark">#3700B3</color>
     <color name="colorAccent">#03DAC5</color>
+
+    <color name="messageFromMeBg">#4466AA</color>
+    <color name="messageFromMeText">#FFFFFF</color>
+    <color name="messageFromOtherBg">#CDCDCD</color>
+    <color name="messageFromOtherText">#444444</color>
 </resources>
