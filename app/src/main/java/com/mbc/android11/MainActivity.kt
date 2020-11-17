@@ -9,6 +9,7 @@ import android.graphics.Bitmap
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import com.mbc.android11.screens.chat.ChatWindowInsetActivity
 import com.mbc.android11.screens.convo.ConversationsActivity
 import com.mbc.android11.utils.startActivity
 import com.mbc.android11.utils.viewModelsWithApplication
@@ -26,8 +27,11 @@ class MainActivity : AppCompatActivity() {
         profile.setOnClickListener { startActivity(ConversationsActivity::class) }
         settings.setOnClickListener { startActivity(ConversationsActivity::class) }
         camera.setOnClickListener { requestCam() }
+        foreground.setOnClickListener { requestForegroundLocation() }
+        background.setOnClickListener { requestBackgroundLocation() }
         addFriend.setOnClickListener { startActivity(FriendlyActivity::class) }
         conversations.setOnClickListener { startActivity(ConversationsActivity::class) }
+        chatInsets.setOnClickListener { startActivity(ChatWindowInsetActivity::class) }
 
         createNotificationChannel()
     }
@@ -52,6 +56,22 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    fun requestForegroundLocation() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), FOREGROUND_PERMISSION_REQUEST_CODE)
+        } else {
+            //openCamera()
+        }
+    }
+
+    fun requestBackgroundLocation() {
+        if (checkSelfPermission(Manifest.permission.ACCESS_BACKGROUND_LOCATION) != PackageManager.PERMISSION_GRANTED) {
+            requestPermissions(arrayOf(Manifest.permission.ACCESS_BACKGROUND_LOCATION), BACKGROUND_PERMISSION_REQUEST_CODE)
+        } else {
+            //openCamera()
+        }
+    }
+
     override fun onRequestPermissionsResult(
         requestCode: Int,
         permissions: Array<out String>,
@@ -73,14 +93,18 @@ class MainActivity : AppCompatActivity() {
 
         when(requestCode) {
             CAMERA_PHOTO_CODE -> {
-                val image = data?.getExtras()?.get("data") as? Bitmap
+                (data?.getExtras()?.get("data") as? Bitmap)?.let {
+                    tempImage.setImageBitmap(it)
+                }
             }
         }
     }
 
     fun openCamera() {
-        startActivity(Intent("android.media.action.IMAGE_CAPTURE"))
+        startActivityForResult(Intent("android.media.action.IMAGE_CAPTURE"), CAMERA_PHOTO_CODE)
     }
+
+
 
     companion object {
         const val CHANNEL_NAME = "PrezoChannelName"
@@ -88,6 +112,8 @@ class MainActivity : AppCompatActivity() {
         const val CHANNEL_DESC = "A channel for presentation"
 
         const val CAMERA_PERMISSION_REQUEST_CODE = 100
-        const val CAMERA_PHOTO_CODE = 101
+        const val FOREGROUND_PERMISSION_REQUEST_CODE = 101
+        const val BACKGROUND_PERMISSION_REQUEST_CODE = 102
+        const val CAMERA_PHOTO_CODE = 1000
     }
 }

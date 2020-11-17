@@ -32,6 +32,9 @@
         <activity android:name=".screens.convo.ConversationsActivity"
             android:screenOrientation="portrait"/>
 
+        <activity android:name=".screens.chat.ChatWindowInsetActivity"
+            android:screenOrientation="portrait"/>
+
         <activity android:name=".screens.chat.ChatActivity"
             android:screenOrientation="portrait"
             android:allowEmbedded="true"

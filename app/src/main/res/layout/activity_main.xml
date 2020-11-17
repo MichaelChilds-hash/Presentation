@@ -9,7 +9,8 @@
     <RelativeLayout
         android:id="@+id/titlebar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:padding="8dp">
 
         <com.mbc.android11.utils.ProfileImages
             android:id="@+id/profile"
@@ -48,9 +49,24 @@
                 android:text="Camera" />
 
             <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/foreground"
+                style="@style/AppButton"
+                android:text="Foreground Location" />
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/background"
+                style="@style/AppButton"
+                android:text="Background Location" />
+
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/conversations"
                 style="@style/AppButton"
                 android:text="Conversations"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/chatInsets"
+                style="@style/AppButton"
+                android:text="Chat Insets"/>
 
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/addFriend"

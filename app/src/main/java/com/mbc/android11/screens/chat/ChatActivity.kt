@@ -3,9 +3,11 @@ package com.mbc.android11.screens.chat
 import android.app.Activity
 import android.content.pm.ShortcutManager
 import android.os.Bundle
+import android.view.WindowInsets
 import android.view.inputmethod.EditorInfo
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.doOnLayout
 import com.mbc.android11.R
 import com.mbc.android11.model.Conversation
 import com.mbc.android11.utils.startActivity
@@ -40,8 +42,12 @@ class ChatActivity : AppCompatActivity() {
         history.adapter = chatAdapter
 
         send.setOnClickListener {
-            viewModel.onSendPressed(edit.text?.toString() ?: "")
-            edit.text?.clear()
+            if(edit.text?.isEmpty() == true) {
+                root.windowInsetsController?.show(WindowInsets.Type.ime())
+            } else {
+                viewModel.onSendPressed(edit.text?.toString() ?: "")
+                edit.text?.clear()
+            }
         }
         edit.setOnEditorActionListener { textView, actionId, keyEvent ->
             if (actionId == EditorInfo.IME_ACTION_SEND) {

@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/root"
     android:layout_width="match_parent"
     android:layout_height="match_parent" >
 
@@ -10,9 +11,10 @@
         android:layout_height="match_parent"
         android:layout_above="@id/chat"
         android:padding="8dp"
+        android:layout_below="@id/titlebar"
         android:clipToPadding="false"
         app:reverseLayout="true"
-        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+        app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"/>
 
     <RelativeLayout
         android:id="@+id/chat"
@@ -50,6 +52,7 @@
     </RelativeLayout>
 
     <RelativeLayout
+        android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="8dp"
