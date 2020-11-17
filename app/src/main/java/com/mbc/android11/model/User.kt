@@ -11,13 +11,22 @@ open class User : RealmObject() {
     var isMe = false; private set
 
     companion object {
-        fun createMock(dao: UserDao, id: Int, name: String, imageRes: Int = R.drawable.friend_ethan, isMe: Boolean = false) {
+
+        fun createMock(
+            dao: UserDao,
+            id: Int,
+            name: String,
+            imageRes: Int = R.drawable.friend_ethan,
+            isMe: Boolean = false
+        ) =
             (dao.get(id) ?: dao.create()).apply {
                 this.id = id
                 this.name = name
                 this.imageRes = imageRes
                 this.isMe = isMe
             }
-        }
+
+        fun createMe(dao: UserDao) =
+            createMock(dao, 0, "Michael", R.drawable.profile_me, isMe = true)
     }
 }

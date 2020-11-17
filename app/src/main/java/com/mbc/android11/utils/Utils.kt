@@ -18,7 +18,7 @@ object Density {
 }
 
 fun Activity.startActivity(clazz: KClass<out Activity>, bundle: Bundle? = null) {
-    startActivity(Intent(this, clazz.java), bundle)
+    startActivity(Intent(this, clazz.java).apply { bundle?.let { putExtras(bundle) } })
 }
 
 @MainThread

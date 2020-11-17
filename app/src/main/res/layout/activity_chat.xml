@@ -2,7 +2,7 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent" >
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/history"
@@ -17,8 +17,61 @@
     <RelativeLayout
         android:id="@+id/chat"
         android:layout_width="match_parent"
-        android:layout_height="70dp"
-        android:layout_alignParentBottom="true"
-        android:elevation="8dp" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#AAAAAA"/>
+
+        <androidx.appcompat.widget.AppCompatEditText
+            android:id="@+id/edit"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="8dp"
+            android:layout_toStartOf="@id/send"
+            android:background="#00FFFFFF"
+            android:textSize="18dp"
+            android:inputType="textAutoComplete|textCapSentences|textMultiLine"
+            android:imeOptions="actionSend"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/send"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingVertical="2dp"
+            android:paddingHorizontal="16dp"
+            android:layout_alignParentEnd="true"
+            android:layout_centerVertical="true"
+            android:text=">"
+            android:textSize="24dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="8dp"
+        android:background="@color/colorPrimaryDark">
+
+        <com.mbc.android11.utils.ProfileImages
+            android:id="@+id/pic"
+            android:layout_width="42dp"
+            android:layout_height="42dp"
+            android:layout_centerVertical="true"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/names"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="personname"
+            android:textSize="24dp"
+            android:textColor="#FFFFFF"
+            android:padding="8dp"
+            android:layout_toRightOf="@id/pic"
+            android:ellipsize="end"/>
+
+    </RelativeLayout>
 
 </RelativeLayout>

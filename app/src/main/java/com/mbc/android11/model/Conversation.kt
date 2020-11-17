@@ -8,7 +8,7 @@ open class Conversation : RealmObject() {
     var id = 0; private set
     var users = RealmList<User>(); private set
 
-    val name get() = users.asSequence().sortedBy { it.name }.map { it.name }.joinToString(", ")
+    val name get() = users.sortedBy { it.name }.map { it.name }.joinToString(", ")
 
     companion object {
 

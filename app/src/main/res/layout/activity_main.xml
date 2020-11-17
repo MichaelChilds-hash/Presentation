@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:gravity="center_horizontal"
-    android:padding="16dp"
-    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <RelativeLayout
+        android:id="@+id/titlebar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
 
@@ -32,19 +30,41 @@
 
     </RelativeLayout>
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/friends"
-        style="@style/AppButton"
-        android:text="Friends"/>
+    <androidx.core.widget.NestedScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/titlebar">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/conversations"
-        style="@style/AppButton"
-        android:text="Conversations"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center_horizontal"
+            android:padding="16dp"
+            android:orientation="vertical">
 
-    <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/addFriend"
-        style="@style/AppButton"
-        android:text="Add Friend"/>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/camera"
+                style="@style/AppButton"
+                android:text="Camera" />
 
-</LinearLayout>
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/conversations"
+                style="@style/AppButton"
+                android:text="Conversations"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/addFriend"
+                style="@style/AppButton"
+                android:text="Add Stuff"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tempImage"
+                android:layout_width="100dp"
+                android:layout_height="150dp"
+                android:layout_marginTop="16dp"/>
+
+        </LinearLayout>
+
+    </androidx.core.widget.NestedScrollView>
+
+</RelativeLayout>

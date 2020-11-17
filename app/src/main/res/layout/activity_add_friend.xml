@@ -8,11 +8,51 @@
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/addFriend"
         style="@style/AppButton"
-        android:text="Add Friend"/>
+        android:text="Ethan Shortcut"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addFriend2"
+        style="@style/AppButton"
+        android:text="Brent Shortcut"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addFriend3"
+        style="@style/AppButton"
+        android:text="Chris Shortcut"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addFriend4"
+        style="@style/AppButton"
+        android:text="Lana Shortcut"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addFriend5"
+        style="@style/AppButton"
+        android:text="Jay Shortcut"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addFriend6"
+        style="@style/AppButton"
+        android:text="Jorge Shortcut"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addFriend7"
+        style="@style/AppButton"
+        android:text="Thomas Shortcut"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/addGroup"
+        style="@style/AppButton"
+        android:text="Add Group Shortcut"/>
 
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/messageFromFriend"
         style="@style/AppButton"
         android:text="Notification From Friend"/>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/messageFromGroup"
+        style="@style/AppButton"
+        android:text="Notification From Group"/>
 
 </LinearLayout>
